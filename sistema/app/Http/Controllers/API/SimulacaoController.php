@@ -37,7 +37,7 @@ class SimulacaoController extends Controller
         $bank = $this->valueArray($json,$instituicoes,$convenios,$parcela,$data['valor_emprestimo']);
 
         
-        return json_encode($bank);
+        return json_encode($bank,JSON_PRETTY_PRINT);
     }
     private function validateValue($data){
 
@@ -73,45 +73,63 @@ class SimulacaoController extends Controller
         
         $bank = array();
         $cont = 0;
+        $banco_anterior = '';
         foreach($json as $item){
+            
             if($instituicoes){
                 if(in_array($item->instituicao,$instituicoes)){
                     if($convenios){
                         if(in_array($item->convenio,$convenios)){
                             if($parcela){
-                                if($parcela == $item->parcelas){                                    
+                                if($parcela == $item->parcelas){
+                                    if($banco_anterior != $item->instituicao){
+                                        $cont = 0;
+                                    }
                                     $bank[$item->instituicao][$cont]['taxa'] = $item->taxaJuros;
                                     $bank[$item->instituicao][$cont]['parcelas'] = $item->parcelas;
                                     $valor_parcela = $valor * $item->coeficiente;
                                     $bank[$item->instituicao][$cont]['valor_parcela'] = $valor_parcela;
                                     $bank[$item->instituicao][$cont]['convenio'] = $item->convenio;
+                                    $banco_anterior = $item->instituicao;
                                     $cont++;
                                 }
-                            }else{                                
+                            }else{     
+                                if($banco_anterior != $item->instituicao){
+                                    $cont = 0;
+                                }                           
                                 $bank[$item->instituicao][$cont]['taxa'] = $item->taxaJuros;
                                 $bank[$item->instituicao][$cont]['parcelas'] = $item->parcelas;
                                 $valor_parcela = $valor * $item->coeficiente;
                                 $bank[$item->instituicao][$cont]['valor_parcela'] = $valor_parcela;
                                 $bank[$item->instituicao][$cont]['convenio'] = $item->convenio;
+                                $banco_anterior = $item->instituicao;
                                 $cont++;                                
                             }                            
                         }
                     }else{
                         if($parcela){
                             if($parcela == $item->parcelas){
+                                if($banco_anterior != $item->instituicao){
+                                    $cont = 0;
+                                }
                                 $bank[$item->instituicao][$cont]['taxa'] = $item->taxaJuros;
                                 $bank[$item->instituicao][$cont]['parcelas'] = $item->parcelas;
                                 $valor_parcela = $valor * $item->coeficiente;
                                 $bank[$item->instituicao][$cont]['valor_parcela'] = $valor_parcela;
                                 $bank[$item->instituicao][$cont]['convenio'] = $item->convenio;
+                                $banco_anterior = $item->instituicao;
                                 $cont++;
                             }
                         }else{                            
+                            if($banco_anterior != $item->instituicao){
+                                $cont = 0;
+                            }
                             $bank[$item->instituicao][$cont]['taxa'] = $item->taxaJuros;
                             $bank[$item->instituicao][$cont]['parcelas'] = $item->parcelas;
                             $valor_parcela = $valor * $item->coeficiente;
                             $bank[$item->instituicao][$cont]['valor_parcela'] = $valor_parcela;
                             $bank[$item->instituicao][$cont]['convenio'] = $item->convenio;
+                            $banco_anterior = $item->instituicao;
                             $cont++;
                         }
                         
@@ -122,19 +140,27 @@ class SimulacaoController extends Controller
                     if(in_array($item->convenio,$convenios)){
                         if($parcela){
                             if($parcela == $item->parcelas){
+                                if($banco_anterior != $item->instituicao){
+                                    $cont = 0;
+                                }
                                 $bank[$item->instituicao][$cont]['taxa'] = $item->taxaJuros;
                                 $bank[$item->instituicao][$cont]['parcelas'] = $item->parcelas;
                                 $valor_parcela = $valor * $item->coeficiente;
                                 $bank[$item->instituicao][$cont]['valor_parcela'] = $valor_parcela;
                                 $bank[$item->instituicao][$cont]['convenio'] = $item->convenio;
+                                $banco_anterior = $item->instituicao;
                                 $cont++;
                             }
                         }else{
+                            if($banco_anterior != $item->instituicao){
+                                $cont = 0;
+                            }
                             $bank[$item->instituicao][$cont]['taxa'] = $item->taxaJuros;
                             $bank[$item->instituicao][$cont]['parcelas'] = $item->parcelas;
                             $valor_parcela = $valor * $item->coeficiente;
                             $bank[$item->instituicao][$cont]['valor_parcela'] = $valor_parcela;
                             $bank[$item->instituicao][$cont]['convenio'] = $item->convenio;
+                            $banco_anterior = $item->instituicao;
                             $cont++;
                         }
                         
@@ -142,19 +168,27 @@ class SimulacaoController extends Controller
                 }else{
                     if($parcela){
                         if($parcela == $item->parcelas){
+                            if($banco_anterior != $item->instituicao){
+                                $cont = 0;
+                            }
                             $bank[$item->instituicao][$cont]['taxa'] = $item->taxaJuros;
                             $bank[$item->instituicao][$cont]['parcelas'] = $item->parcelas;
                             $valor_parcela = $valor * $item->coeficiente;
                             $bank[$item->instituicao][$cont]['valor_parcela'] = $valor_parcela;
                             $bank[$item->instituicao][$cont]['convenio'] = $item->convenio;
+                            $banco_anterior = $item->instituicao;
                             $cont++;
                         }
                     }else{
+                        if($banco_anterior != $item->instituicao){
+                            $cont = 0;
+                        }
                         $bank[$item->instituicao][$cont]['taxa'] = $item->taxaJuros;
                         $bank[$item->instituicao][$cont]['parcelas'] = $item->parcelas;
                         $valor_parcela = $valor * $item->coeficiente;
                         $bank[$item->instituicao][$cont]['valor_parcela'] = $valor_parcela;
                         $bank[$item->instituicao][$cont]['convenio'] = $item->convenio;
+                        $banco_anterior = $item->instituicao;
                         $cont++;
                     }
                     
