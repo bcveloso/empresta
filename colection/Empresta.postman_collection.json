@@ -1,0 +1,162 @@
+{
+	"info": {
+		"_postman_id": "f0be3f98-88d6-4a10-bbf9-2d8917dc33a1",
+		"name": "Empresta",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "routes",
+			"item": [
+				{
+					"name": "token",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "teste@teste.com.br",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "teste@123",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost/empresta/sistema/public/api/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"empresta",
+								"sistema",
+								"public",
+								"api",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "instituicoes",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKfsdV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3RcL2VtcHJlc3RhXC9zaXN0ZW1hXC9wdWJsaWNcL2FwaVwvbG9naW4iLCJpYXQiOjE2MTQwNDAwMDIsImV4cCI6MTYxNDA0MzYwMiwibmJmIjoxNjE0MDQwMDAyLCJqdGkiOiJBd0ZZSkNsRzZlbDR1eWMxIiwic3ViIjoxLCJwcnYiOiI4N2UwYWYxZWY5ZmQxNTgxMmZkZWM5NzE1M2ExNGUwYjA0NzU0NmFhIn0.xCrgzw464JXj_nyFr9dJjkgZs5S7IoPsprF1VS4R6ZA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/empresta/sistema/public/api/instituicoes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"empresta",
+								"sistema",
+								"public",
+								"api",
+								"instituicoes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "convenios",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3RcL2VtcHJlc3RhXC9zaXN0ZW1hXC9wdWJsaWNcL2FwaVwvbG9naW4iLCJpYXQiOjE2MTQwNDAwNTQsImV4cCI6MTYxNDA0MzY1NCwibmJmIjoxNjE0MDQwMDU0LCJqdGkiOiJkdmVVcmhJenp0M0ZPdTh4Iiwic3ViIjoxLCJwcnYiOiI4N2UwYWYxZWY5ZmQxNTgxMmZkZWM5NzE1M2ExNGUwYjA0NzU0NmFhIn0.3ydIM8yVXzy95Qaar5C29o5SNWlKxiK4jUoOwR1ymzE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/empresta/sistema/public/api/convenios",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"empresta",
+								"sistema",
+								"public",
+								"api",
+								"convenios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "simulacao",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://localhost/empresta/sistema/public/api/simulacao?valor_emprestimo=30000",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"empresta",
+								"sistema",
+								"public",
+								"api",
+								"simulacao"
+							],
+							"query": [
+								{
+									"key": "parcela",
+									"value": "72",
+									"disabled": true
+								},
+								{
+									"key": "valor_emprestimo",
+									"value": "30000"
+								},
+								{
+									"key": "instituicoes[]",
+									"value": "BMG",
+									"disabled": true
+								},
+								{
+									"key": "convenios[]",
+									"value": "FEDERAL",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
